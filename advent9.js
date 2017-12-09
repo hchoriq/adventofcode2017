@@ -3,13 +3,9 @@ const input = ``;
 function clearIgnores(input) {
   let ignoring = false;
   return input.split('').reduce((acc, char) => {
-    if (ignoring) {
-      ignoring = false;  
-    } else if (char == '!') {
-      ignoring = true;
-    } else {
-      acc.push(char);
-    }
+    if (ignoring) ignoring = false;  
+    else if (char == '!') ignoring = true;
+    else acc.push(char);
     return acc;
   }, []).join('');
 }
@@ -18,13 +14,11 @@ function clearGarbage(input) {
   let ignoring = false;
   return input.split('').reduce((acc, char) => {
     if (ignoring && char == '>') {
-      ignoring = false;
       acc.push(char);
+      ignoring = false;
     } else if (!ignoring) {
       acc.push(char);
-      if (char == '<') {
-        ignoring = true;
-      }
+      if (char == '<') ignoring = true;
     }
     return acc;
   }, []).join('');
@@ -33,9 +27,8 @@ function clearGarbage(input) {
 function parseGroupsSum(input) {
   let currLevel = 0;
   return input.split('').reduce((stack, char) => {
-    if (char == '{') {
-      currLevel++;
-    } else if (char == '}') {
+    if (char == '{') currLevel++;
+    else if (char == '}') {
       stack[currLevel] = (stack[currLevel] || 0) + 1;
       currLevel--; 
     }
