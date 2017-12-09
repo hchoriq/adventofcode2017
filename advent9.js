@@ -1,5 +1,6 @@
 const input = ``;
 
+// Remove all ! and immediate character after !
 function clearIgnores(input) {
   let ignoring = false;
   return input.split('').reduce((acc, char) => {
@@ -10,6 +11,7 @@ function clearIgnores(input) {
   }, []).join('');
 }
 
+// Remove anything between any opening and closing < >; leave < >
 function clearGarbage(input) {
   let ignoring = false;
   return input.split('').reduce((acc, char) => {
@@ -24,6 +26,7 @@ function clearGarbage(input) {
   }, []).join('');
 }
 
+// Parse groups of { }, track levels in stack array, and and increment counters in each level. Don't increment level if a comma (same level). Sum counters of each stack level.
 function parseGroupsSum(input) {
   let currLevel = 0;
   return input.split('').reduce((stack, char) => {
